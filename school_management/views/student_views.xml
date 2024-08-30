@@ -25,11 +25,16 @@
         <field name="model">school.student</field>
         <field name="arch" type="xml">
             <form string="students">
+                <header>
+                    <button name="action_select" type="object" string="select" class="oe_highlight"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
                 <sheet>
                     <group>
                         <group>
                             <field name="student_name"/>
                             <field name="dateofbirth"/>
+                            <field name="age"/>
                             <field name="gaurdian_name"/>
                         </group>
                         <group>
@@ -41,7 +46,10 @@
                             <field name="standard"/>
                             <field name="department"/>
                             <field name="teacher"/>
+                            <field name="teacher_no"/>
+                            <field name="extra_staff" widget="many2many_tags"/>
                             <field name="fee_structure"/>
+
                         </group>
                     </group>
                 </sheet>

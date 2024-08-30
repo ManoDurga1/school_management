@@ -19,5 +19,10 @@
           name="Fee Structures"
           parent="menu_school_root"
           action="action_fee_structure"/>
+    <menuitem id="menu_scl_enquire"
+              name="Enquire"
+              parent="menu_school_root"
+              action="action_scl_enquire"
+              />
 
 </odoo>

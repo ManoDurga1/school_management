@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+     <record id="view_scl_enquire_tree" model="ir.ui.view">
+        <field name="name">scl.senquire.tree</field>
+        <field name="model">scl.enquire</field>
+        <field name="arch" type="xml">
+            <tree string="Enquire">
+                <field name="parent_name"/>
+                <field name="parent_job"/>
+                <field name="parent_no"/>
+                <field name="student_name"/>
+                <field name="student_age"/>
+                <field name="standard"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_scl_enquire_form" model="ir.ui.view">
+        <field name="name">scl.enquire.form</field>
+        <field name="model">scl.enquire</field>
+        <field name="arch" type="xml">
+            <form string="Enquire">
+                <sheet>
+                    <group>
+                        <field name="parent_name"/>
+                        <field name="parent_job"/>
+                        <field name="parent_no"/>
+                        <field name="student_name"/>
+                        <field name="student_age"/>
+                        <field name="standard"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="action_scl_enquire" model="ir.actions.act_window">
+        <field name="name">Enquires</field>
+        <field name="res_model">scl.enquire</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+</odoo>
