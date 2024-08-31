@@ -23,7 +23,7 @@
                 <header>
                     <button name="action_join" type="object" string="Join"
                             invisible="status !='draft'" class="oe_highlight"/>
-                    <field name="status" widget="statusbar"/>
+                    <field name="status" widget="statusbar" option="{'clickable':'1'}"/>
                 </header>
                 <sheet>
                     <group>
