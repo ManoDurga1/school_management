@@ -4,13 +4,13 @@
               name="school"
     />
     <menuitem id="menu_student"
-              name="student"
+              name="Student"
               sequence="9"
               parent="menu_school_root"
               action="action_school_student"
     />
     <menuitem id="menu_teacher"
-              name="teacher"
+              name="Teacher"
               sequence="10"
               parent="menu_school_root"
               action="action_school_teacher"

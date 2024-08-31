@@ -29,6 +29,7 @@ class school_management(models.Model):
     state =fields.Selection([('not selected','Not selected'),('selected','Selected')],
                             default="not selected",string="State")
 
+
     @api.onchange('teacher')
 
     def _onchange_teacher(self):

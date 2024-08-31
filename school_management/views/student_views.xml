@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="view_school_student_tree" model="ir.ui.view" >
+    <record id="view_school_student_tree" model="ir.ui.view">
         <field name="name">view.school.student.tree</field>
         <field name="model">school.student</field>
         <field name="arch" type="xml">
-            <tree string="students">
+            <tree string="Students">
                 <field name="student_name"/>
                 <field name="dateofbirth" optional="show"/>
                 <field name="gender" optional="hide"/>
@@ -14,17 +14,15 @@
                 <field name="standard" optional="show"/>
                 <field name="department" optional="show"/>
                 <field name="teacher"/>
-                <field name="fee_structure"/>
-
             </tree>
         </field>
     </record>
 
-    <record id="view_school_student_form" model="ir.ui.view" >
+    <record id="view_school_student_form" model="ir.ui.view">
         <field name="name">view.school.student.form</field>
         <field name="model">school.student</field>
         <field name="arch" type="xml">
-            <form string="students">
+            <form string="Students">
                 <header>
                     <button name="action_select" type="object" string="select" class="oe_highlight"/>
                     <field name="state" widget="statusbar"/>
@@ -48,10 +46,33 @@
                             <field name="teacher"/>
                             <field name="teacher_no"/>
                             <field name="extra_staff" widget="many2many_tags"/>
-                            <field name="fee_structure"/>
-
                         </group>
                     </group>
+                    <notebook>
+                        <page name="page_fee_structure" string="Fee Structure">
+                            <field name="fee_structure">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="fee_amount"/>
+                                    <field name="from_date"/>
+                                    <field name="to_date"/>
+                                    <field name="tax_amount"/>
+                                    <field name="student_id"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="name"/>
+                                        <field name="fee_amount"/>
+                                        <field name="from_date"/>
+                                        <field name="to_date"/>
+                                        <field name="tax_amount"/>
+                                        <field name="student_id"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                    </notebook>
+
                 </sheet>
 
             </form>

@@ -9,5 +9,11 @@ class Enquire(models.Model):
     student_name= fields.Char(string="Student Name")
     student_age= fields.Integer(string="Student Age")
     standard=fields.Char(string="Class")
+    status=fields.Selection([('draft','Draft'),('admit','Admit')],
+                            default="draft",string="Status")
+
+    def action_join(self):
+        self.status='admit'
+
 
 

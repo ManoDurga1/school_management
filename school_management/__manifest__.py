@@ -7,7 +7,7 @@
         "views/enquire_views.xml",
         "views/student_views.xml",
         "views/teacher_views.xml",
-        'views/fee_structure_views.xml',
+        "views/fee_structure_views.xml",
         "views/menu.xml"
     ]
 

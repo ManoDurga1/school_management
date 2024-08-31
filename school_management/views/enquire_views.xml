@@ -20,6 +20,11 @@
         <field name="model">scl.enquire</field>
         <field name="arch" type="xml">
             <form string="Enquire">
+                <header>
+                    <button name="action_join" type="object" string="Join"
+                            invisible="status !='draft'" class="oe_highlight"/>
+                    <field name="status" widget="statusbar"/>
+                </header>
                 <sheet>
                     <group>
                         <field name="parent_name"/>
