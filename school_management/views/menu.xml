@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <menuitem id="menu_school_root"
-              name="school"
+              name="School"
     />
     <menuitem id="menu_student"
               name="Student"
@@ -18,7 +18,8 @@
     <menuitem id="menu_fee_structure"
           name="Fee Structures"
           parent="menu_school_root"
-          action="action_fee_structure"/>
+          action="action_fee_structure"
+    />
     <menuitem id="menu_scl_enquire"
               name="Enquire"
               parent="menu_school_root"

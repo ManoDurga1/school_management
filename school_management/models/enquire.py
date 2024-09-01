@@ -1,8 +1,12 @@
 from odoo import api,models,fields
+from odoo.exceptions import ValidationError
+
 
 class Enquire(models.Model):
     _name = "scl.enquire"
     _description = "Admissions Open"
+    _rec_name = "student_name"
+
     parent_name = fields.Char(string="Parent Name")
     parent_job = fields.Char(string="Parent Job")
     parent_no= fields.Char(string="Parent No")
@@ -14,6 +18,12 @@ class Enquire(models.Model):
 
     def action_join(self):
         self.status='admit'
+        student_id=self.env["school.student"].search([('phone_number','=',self.parent_no)])
+        print("Student Ids are :",student_id)
+        for stu in student_id:
+            print("Student Name is:",stu.student_name)
+        if student_id:
+            raise ValidationError("there is a student with same phone number")
         var=self.env["school.student"]
         for rec in self:
             var.create({
