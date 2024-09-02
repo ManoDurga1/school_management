@@ -32,6 +32,7 @@ class SchoolManagement(models.Model):
     state =fields.Selection([('not selected','Not selected'),('selected','Selected')],
                             default="not selected",string="State")
 
+
     def create(self, vals):
         print('Entered in create', vals)
         if vals['phone_number']:
@@ -39,12 +40,14 @@ class SchoolManagement(models.Model):
             if student_id:
                 raise ValidationError("there is a student with same phone number")
         return super(SchoolManagement,self).create(vals)
+
     
     
     @api.onchange('teacher')
     def _onchange_teacher(self):
        if self.teacher:
         self.teacher_no = self.teacher.mobile_number
+
     def action_select(self):
         self.state= "selected"
 

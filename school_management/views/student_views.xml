@@ -14,6 +14,7 @@
                 <field name="standard" optional="show"/>
                 <field name="department" optional="show"/>
                 <field name="teacher"/>
+                <field name="joining_date"/>
             </tree>
         </field>
     </record>
@@ -33,43 +34,49 @@
                             <field name="student_name"/>
                             <field name="dateofbirth"/>
                             <field name="age"/>
-                            <field name="gaurdian_name"/>
-                        </group>
-                        <group>
                             <field name="gender"/>
-                            <field name="address"/>
-                            <field name="phone_number"/>
                         </group>
                         <group>
-                            <field name="standard"/>
-                            <field name="department"/>
-                            <field name="teacher"/>
-                            <field name="teacher_no"/>
-                            <field name="extra_staff" widget="many2many_tags"/>
+
+                            <field name="gaurdian_name"/>
+                            <field name="phone_number"/>
+                            <field name="gender"/>
+                            <field name="joining_date"/>
                         </group>
+
                     </group>
                     <notebook>
                         <page name="page_fee_structure" string="Fee Structure">
                             <field name="fee_structure">
                                 <tree editable="bottom">
                                     <field name="name"/>
-                                    <field name="fee_amount"/>
+                                    <field name="student_id"/>
                                     <field name="from_date"/>
                                     <field name="to_date"/>
                                     <field name="tax_amount"/>
-                                    <field name="student_id"/>
+                                    <field name="fee_amount"/>
+                                    <field name="state"/>
                                 </tree>
                                 <form>
                                     <group>
                                         <field name="name"/>
-                                        <field name="fee_amount"/>
+                                        <field name="student_id"/>
                                         <field name="from_date"/>
                                         <field name="to_date"/>
                                         <field name="tax_amount"/>
-                                        <field name="student_id"/>
+                                        <field name="fee_amount"/>
                                     </group>
                                 </form>
                             </field>
+                        </page>
+                        <page name="other_info" string="Other Info">
+                            <group>
+                                <field name="standard"/>
+                                <field name="department"/>
+                                <field name="teacher"/>
+                                <field name="teacher_no"/>
+                                <field name="extra_staff" widget="many2many_tags"/>
+                            </group>
                         </page>
                     </notebook>
 

@@ -1,1 +1,3 @@
-from .import students,teachers,fee_structure,enquire,sale
+from .import students,teachers,fee_structure,enquire
+from .import sale
+from .import invoice

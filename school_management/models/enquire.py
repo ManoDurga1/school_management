@@ -1,5 +1,6 @@
 from odoo import api,models,fields
 from odoo.exceptions import ValidationError
+from datetime import datetime
 
 
 class Enquire(models.Model):
@@ -18,6 +19,7 @@ class Enquire(models.Model):
 
     def action_join(self):
         self.status='admit'
+        today=datetime.today()
         student_id=self.env["school.student"].search([('phone_number','=',self.parent_no)])
         print("Student Ids are :",student_id)
         for stu in student_id:
@@ -31,7 +33,8 @@ class Enquire(models.Model):
                 'gaurdian_name':rec.parent_name,
                 'phone_number':rec.parent_no,
                 'age':rec.student_age,
-                'standard':rec.standard
+                'standard':rec.standard,
+                'joining_date':today
 
             })
 

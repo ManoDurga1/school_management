@@ -11,4 +11,6 @@ class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
     customer_note=fields.Text(string='Customer Note')
+    parent_name = fields.Char(string="Parent Name")
+    parent_num =  fields.Char(string="Parent Num")
 
