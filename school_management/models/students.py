@@ -2,7 +2,7 @@ from email.policy import default
 
 from dateutil.utils import today
 from datetime import datetime
-from odoo import api, fields, models
+from odoo import api, fields, models, _
 from odoo.exceptions import ValidationError
 
 from odoo.tools.populate import compute
@@ -13,6 +13,7 @@ class SchoolManagement(models.Model):
     _name = 'school.student'
     _description = 'school life is memorible'
     _rec_name = "student_name"
+
 
     student_name = fields.Char(string='Name', required=True)
     dateofbirth = fields.Date(string="DOB")
@@ -42,7 +43,17 @@ class SchoolManagement(models.Model):
         return super(SchoolManagement,self).create(vals)
 
     
-    
+    def action_suggestion(self):
+        return {
+            'name': _('Suggestion'),
+            'type': 'ir.actions.act_window',
+            'res_model': 'suggestion.student',
+            'view_mode': 'form',
+            'target':'new',
+            'context': {'default_field_name': 'self.student_name'}
+        }
+
+
     @api.onchange('teacher')
     def _onchange_teacher(self):
        if self.teacher:

@@ -25,5 +25,10 @@
               parent="menu_school_root"
               action="action_scl_enquire"
               />
+    <menuitem id="menu_student_suggestion"
+              name="Suggestions"
+              parent="menu_school_root"
+              action="action_suggestion_student"
+              />
 
 </odoo>

@@ -25,7 +25,10 @@
         <field name="arch" type="xml">
             <form string="Students">
                 <header>
-                    <button name="action_select" type="object" string="select" class="oe_highlight"/>
+                    <button name="action_select" type="object" string="Select"
+                            class="oe_highlight" invisible="state=='selected'"/>
+                     <button name="action_suggestion" type="object" string="Suggestion"
+                            class="oe_highlight" invisible="state=='not selected'"/>
                     <field name="state" widget="statusbar"/>
                 </header>
                 <sheet>
@@ -40,7 +43,6 @@
 
                             <field name="gaurdian_name"/>
                             <field name="phone_number"/>
-                            <field name="gender"/>
                             <field name="joining_date"/>
                         </group>
 

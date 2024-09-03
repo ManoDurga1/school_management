@@ -13,6 +13,8 @@
         "views/fee_structure_views.xml",
         "views/sale.xml",
         "views/invoice_views.xml",
+        "views/suggestion_stu_views.xml",
+        "wizard/suggestion_views.xml",
         "views/menu.xml"
     ]
 
