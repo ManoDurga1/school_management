@@ -18,7 +18,9 @@
         "views/invoice_views.xml",
         "views/suggestion_stu_views.xml",
         "wizard/suggestion_views.xml",
-        "views/menu.xml"
+        "views/menu.xml",
+        "report/report.xml",
+        "report/report_template.xml"
     ]
 
 }

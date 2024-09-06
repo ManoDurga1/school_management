@@ -120,4 +120,5 @@ class SchoolManagement(models.Model):
     # Email button
     def action_email(self):
         template = self.env.ref('school_management.student_email')
-        template.send_mail(self.login_id, force_send=True)
+        mail=template.send_mail(self.id, force_send=True)
+        print("hello",mail)
