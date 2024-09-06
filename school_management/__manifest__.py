@@ -3,10 +3,13 @@
     "author": "mr.manu",
     "version": "18.0",
     "depends": ['sale',
-                'account'],
+           'account'],
 
     "data": [
         "security/ir.model.access.csv",
+        "security/school_groups.xml",
+        "security/school_security.xml",
+        "data/student_mail_template.xml",
         "views/enquire_views.xml",
         "views/student_views.xml",
         "views/teacher_views.xml",

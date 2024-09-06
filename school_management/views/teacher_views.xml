@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-     <record id="view_school_teacher_tree" model="ir.ui.view">
+    <record id="view_school_teacher_tree" model="ir.ui.view">
         <field name="name">school.teacher.tree</field>
         <field name="model">school.teacher</field>
         <field name="arch" type="xml">
@@ -10,6 +10,7 @@
                 <field name="mobile_number"/>
                 <field name="dateofjoining"/>
                 <field name="classteacher"/>
+                <field name="email"/>
             </tree>
         </field>
     </record>
@@ -19,6 +20,11 @@
         <field name="model">school.teacher</field>
         <field name="arch" type="xml">
             <form string="Teacher">
+                <header>
+                    <button name="action_confirm" type="object" class="oe_highlight"
+                            invisible="state =='permanent'" string="Confirm"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
                 <sheet>
                     <group>
                         <field name="teacher_name"/>
@@ -27,7 +33,17 @@
                         <field name="mobile_number"/>
                         <field name="dateofjoining"/>
                         <field name="classteacher"/>
+                        <field name="email"/>
                     </group>
+                    <notebook>
+                        <page name="additional_info" string="Additional Info">
+                            <group>
+                                <field name="login_id"/>
+                                <field name="email" string="Login Id"/>
+                            </group>
+
+                        </page>
+                    </notebook>
                 </sheet>
             </form>
         </field>

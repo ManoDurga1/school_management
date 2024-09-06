@@ -8,6 +8,7 @@
                 <field name="student_name"/>
                 <field name="dateofbirth" optional="show"/>
                 <field name="gender" optional="hide"/>
+                <field name="email"/>
                 <field name="gaurdian_name" optional="show"/>
                 <field name="address" optional="hide"/>
                 <field name="phone_number" optional="show"/>
@@ -27,17 +28,25 @@
                 <header>
                     <button name="action_select" type="object" string="Select"
                             class="oe_highlight" invisible="state=='selected'"/>
-                     <button name="action_suggestion" type="object" string="Suggestion"
+                    <button name="action_suggestion" type="object" string="Suggestion"
                             class="oe_highlight" invisible="state=='not selected'"/>
                     <field name="state" widget="statusbar"/>
+                    <button name="action_email" type="object" string="Send Email" class="oe_highlight"/>
                 </header>
                 <sheet>
+                    <div name="button_box" class="oe_button_box">
+                        <button name="action_view_button" type="object" string="Suggestion"
+                                class="oe_stat_button" icon="fa-star">
+                            <field name="suggestion_count" widget="statinfo"/>
+                        </button>
+                    </div>
                     <group>
                         <group>
                             <field name="student_name"/>
                             <field name="dateofbirth"/>
                             <field name="age"/>
                             <field name="gender"/>
+                            <field name="email"/>
                         </group>
                         <group>
 
@@ -73,12 +82,17 @@
                         </page>
                         <page name="other_info" string="Other Info">
                             <group>
+                                <field name="login_id" readonly="True"/>
+                                <field name="email" string="Login Id"/>
+                            </group>
+                            <group>
                                 <field name="standard"/>
                                 <field name="department"/>
                                 <field name="teacher"/>
                                 <field name="teacher_no"/>
                                 <field name="extra_staff" widget="many2many_tags"/>
                             </group>
+
                         </page>
                     </notebook>
 

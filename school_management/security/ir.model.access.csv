@@ -1,7 +1,7 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_school_student,access_school_student,model_school_student,base.group_user,1,1,1,1
-access_school_teacher,access_school_teacher,model_school_teacher,base.group_user,1,1,1,1
-access_fee_structure,access_fee_structure,model_fee_structure,base.group_user,1,1,1,1
-access_scl_enquire,access_scl_enquire,model_scl_enquire,base.group_user,1,1,1,1
-access_suggestion_student,access_suggestion_student,model_suggestion_student,base.group_user,1,1,1,1
-access_suggestion_student12,access_suggestion_student12,model_suggestion_student12,base.group_user,1,1,1,1
+access_school_student,access_school_student,model_school_student,,1,1,1,1
+access_school_teacher,access_school_teacher,model_school_teacher,,1,1,1,1
+access_fee_structure,access_fee_structure,model_fee_structure,,1,1,1,1
+access_scl_enquire,access_scl_enquire,model_scl_enquire,,1,1,1,1
+access_suggestion_student,access_suggestion_student,model_suggestion_student,,1,1,1,1
+access_suggestion_student12,access_suggestion_student12,model_suggestion_student12,,1,1,1,1
