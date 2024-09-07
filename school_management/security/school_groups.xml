@@ -8,13 +8,13 @@
         <field name="name">Student</field>
         <field name="category_id" ref="school_management.module_category_school"/>
         <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
-         <field name="comment">This user will have access to students</field>
+         <field name="comment">This user will have access to him self only</field>
     </record>
      <record id="group_school_teacher" model="res.groups">
         <field name="name">Teacher</field>
         <field name="category_id" ref="school_management.module_category_school"/>
         <field name="implied_ids" eval="[(4, ref('school_management.group_school_student'))]"/>
-         <field name="comment">This user will have access to students</field>
+         <field name="comment">This user will have access to students and them self</field>
     </record>
     <record id="group_school_management" model="res.groups">
         <field name="name">Management</field>

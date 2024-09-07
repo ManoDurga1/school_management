@@ -20,13 +20,14 @@ class school_management(models.Model):
 
     def action_confirm(self):
         self.state='permanent'
-        self.env['res.users'].create({
+        teach_user=self.env['res.users'].create({
             'name': self.teacher_name,
             'login': self.email,
             'email': self.email,
             'password': 'teacher',
             'groups_id':[(6, 0, [self.env.ref('school_management.group_school_teacher').id])]
         })
+        self.login_id=teach_user.id
 
 
 
