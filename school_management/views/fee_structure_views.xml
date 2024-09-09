@@ -11,7 +11,10 @@
                 <field name="from_date"/>
                 <field name="to_date"/>
                 <field name="tax_amount"/>
+                <field name="tax" widget="many2many_tags"/>
+                <field name="total_amount"/>
                 <field name="state"/>
+
 
             </tree>
         </field>
@@ -35,9 +38,15 @@
                         <field name="from_date"/>
                         <field name="to_date"/>
                         <field name="tax_amount"/>
+                        <field name="tax" widget="many2many_tags"/>
+                        <field name="total_amount"/>
                         <field name="state"/>
                     </group>
                 </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" groups="base.group_user"/>
+                    <field name="message_ids"/>
+                </div>
             </form>
         </field>
     </record>

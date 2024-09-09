@@ -3,7 +3,7 @@
     "author": "mr.manu",
     "version": "18.0",
     "depends": ['sale',
-           'account'],
+           'account','mail'],
 
     "data": [
         "security/ir.model.access.csv",
