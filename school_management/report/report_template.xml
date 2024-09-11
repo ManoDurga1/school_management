@@ -8,37 +8,43 @@
                 <div class="page">
                     <h2 style="color: blue;" align="center">Student Fee Report
                     </h2>
+                    <br/>
+                    <br/>
                     <!-- Loop through the student records -->
                     <main>
                         <t t-foreach="docs" t-as="doc">
-                            <p>
-                                <strong style="color: red;">Name:</strong>
-                                <t t-esc="doc.student_name"/>
-                            </p>
-                            <p>
-                                <strong style="color: red;">Age:</strong>
-                                <t t-esc="doc.age"/>
-                            </p>
-                            <p>
-                                <strong style="color: red;">Grade:</strong>
-                                <t t-esc="doc.standard"/>
-                            </p>
-                            <p>
-                                <strong style="color: red;">Email:</strong>
-                                <t t-esc="doc.email"/>
-                            </p>
-                            <p>
-                                <strong style="color: red;">Guardian Name:</strong>
-                                <t t-esc="doc.gaurdian_name"/>
-                            </p>
-                            <p>
-                                <strong style="color: red;">Address:</strong>
-                                <t t-esc="doc.address"/>
-                            </p>
+                            <div class="row">
+                                <div class="col-6">
+                                    <p>
+                                        <strong style="color: red;">Name:</strong>
+                                        <t t-esc="doc.student_name"/>
+                                    </p>
+                                    <p>
+                                        <strong style="color: red;">Age:</strong>
+                                        <t t-esc="doc.age"/>
+                                    </p>
+                                    <p>
+                                        <strong style="color: red;">Grade:</strong>
+                                        <t t-esc="doc.standard"/>
+                                    </p>
+                                </div>
+                                <div class="col-6">
+                                    <p>
+                                        <strong style="color: red;">Email:</strong>
+                                        <t t-esc="doc.email"/>
+                                    </p>
+                                    <p>
+                                        <strong style="color: red;">Guardian Name:</strong>
+                                        <t t-esc="doc.gaurdian_name"/>
+                                    </p>
+                                    <p>
+                                        <strong style="color: red;">Address:</strong>
+                                        <t t-esc="doc.address"/>
+                                    </p>
+                                </div>
+                            </div>
                             <br/>
                             <br/>
-
-
                             <table class="table table-sm table-bordered"
                                    style="border-collapse: collapse; width: 100%; border: 1px solid #ddd;">
                                 <thead>

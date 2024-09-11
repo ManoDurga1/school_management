@@ -3,6 +3,7 @@ from email.policy import default
 from dateutil.utils import today
 from datetime import datetime
 from odoo import api, fields, models, _
+from odoo.addons.test_impex.tests.test_load import message
 from odoo.cli.scaffold import template
 from odoo.exceptions import ValidationError
 
@@ -36,6 +37,8 @@ class SchoolManagement(models.Model):
 
     state = fields.Selection([('not selected', 'Not selected'), ('selected', 'Selected')],
                              default="not selected", string="State")
+    # partner_id = fields.Many2one('res.partner', string="Customer",
+    #                              help="The partner associated with the student.")
 
     login_id = fields.Many2one('res.users', string='User Id')
 
@@ -137,6 +140,35 @@ class SchoolManagement(models.Model):
             rec.total_fee_amount = fee_sum
             rec.total_sum_amount = total_sum
             rec.total_tax_amount = rec.total_sum_amount - rec.total_fee_amount
+
+
+
+    # creating cron job calling........
+    @api.model
+    def test_cron_job(self):
+        today=datetime.today().date()
+        students_due_date=self.search([('fee_structure.due_date','=',today)])
+
+        for student in students_due_date:
+            message =f"Reminder: {student.student_name}'s due date is today!"
+            student.message_post(body = message)
+
+            # calling through email..........
+            template = self.env.ref('school_management.student_due_date_reminder_email_template', raise_if_not_found=False)
+            if template:
+                template.send_mail(student.id, force_send=True)
+                print("its working")
+            else:
+                print("not found the template")
+
+
+    # auto fetch for partner_id
+
+
+
+
+
+
 
 
 

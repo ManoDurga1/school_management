@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data noupdate="1">
+        <!-- Email Template for Student Due Date Reminder -->
+        <record id="student_due_date_reminder_email_template" model="mail.template">
+            <field name="name">Student Due Date Reminder</field>
+            <field name="model_id" ref="model_school_student"/>
+            <field name="subject">Reminder: Due Date for {{object.student_name}}</field>
+            <field name="email_from">manodurga143@gmail.com</field>
+            <field name="email_to">{{object.email}}</field> <!-- Use student's email field -->
+            <field name="body_html">
+                <![CDATA[
+                    <p>Hello <t t-out="object.student_name"/>,</p>
+                    <p>This is a reminder that your due date is today: <t t-out="object.fee_structure[0].due_date"/>.</p>
+                    <p>Best regards,<br/>
+                    Aditya School & Collage,<br/>
+                    Rajamandry</p>
+                ]]>
+
+            </field>
+        </record>
+    </data>
+</odoo>

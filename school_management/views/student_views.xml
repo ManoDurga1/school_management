@@ -16,6 +16,7 @@
                 <field name="department" optional="show"/>
                 <field name="teacher"/>
                 <field name="joining_date"/>
+<!--                <field name="partner_id"/>-->
             </tree>
         </field>
     </record>
@@ -53,6 +54,7 @@
                             <field name="gaurdian_name"/>
                             <field name="phone_number"/>
                             <field name="joining_date"/>
+<!--                            <field name="partner_id"/>-->
                         </group>
 
                     </group>
@@ -61,14 +63,17 @@
                             <field name="fee_structure">
                                 <tree editable="bottom">
                                     <field name="name"/>
+                                    <field name="product_id"/>
                                     <field name="student_id"/>
-                                    [
                                     <field name="from_date" optional="hide"/>
-                                    <field name="to_date" optional="hide"/>
+                                    <field name="due_date" optional="hide"/>
                                     <field name="tax" widget="many2many_tags"/>
                                     <field name="tax_amount"/>
                                     <field name="fee_amount"/>
                                     <field name="total_amount"/>
+
+                                     <button name="action_payment" type="object" class="oe_highlight"
+                                                string="Make Payment"/>
                                     <field name="state" optional="hide"/>
                                 </tree>
                                 <form>
@@ -76,11 +81,12 @@
                                         <field name="name"/>
                                         <field name="student_id"/>
                                         <field name="from_date"/>
-                                        <field name="to_date"/>
+                                        <field name="due_date"/>
                                         <field name="tax" widget="many2many_tags"/>
                                         <field name="tax_amount"/>
                                         <field name="fee_amount"/>
                                         <field name="total_amount"/>
+
                                     </group>
                                 </form>
                             </field>

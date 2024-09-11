@@ -10,6 +10,8 @@
         "security/school_groups.xml",
         "security/school_security.xml",
         "data/student_mail_template.xml",
+        "data/cron.xml",
+        "data/student_due_reminder_template.xml",
         "views/enquire_views.xml",
         "views/student_views.xml",
         "views/teacher_views.xml",
