@@ -37,9 +37,15 @@
                 <sheet>
                     <div name="button_box" class="oe_button_box">
                         <button name="action_view_button" type="object" string="Suggestion"
-                                class="oe_stat_button" icon="fa-star">
+                                class="oe_stat_button" icon="fa-star" invisible="suggestion_count==0">
                             <field name="suggestion_count" widget="statinfo"/>
                         </button>
+                        <button name="action_view_invoice" type="object" string="Invoices"
+                                class="oe_stat_button" icon="fa-pencil-square-o" invisible="invoice_count == 0">
+                                <field name="invoice_count" widget="statinfo" string="Invoices"/>
+                        </button>
+
+
                     </div>
                     <group>
                         <group>
@@ -47,7 +53,7 @@
                             <field name="dateofbirth"/>
                             <field name="age"/>
                             <field name="gender"/>
-                            <field name="email"/>
+                            <field name="email" widget="email"/>
                         </group>
                         <group>
 

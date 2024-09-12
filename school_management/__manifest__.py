@@ -17,6 +17,7 @@
         "views/teacher_views.xml",
         "views/fee_structure_views.xml",
         "views/sale.xml",
+        "views/product_brand.xml",
         "views/invoice_views.xml",
         "views/suggestion_stu_views.xml",
         "wizard/suggestion_views.xml",

@@ -14,6 +14,7 @@ class SchoolManagement(models.Model):
     _name = 'school.student'
     _description = 'school life is memorible'
     _rec_name = "student_name"
+
     _inherit = [
         'mail.thread'
     ]
@@ -42,12 +43,18 @@ class SchoolManagement(models.Model):
 
     login_id = fields.Many2one('res.users', string='User Id')
 
+    invoice_count = fields.Integer(string="Invoices", compute="_invoice_count")
     suggestion_count = fields.Integer(string="Suggestion",
                                       compute="_suggestion_count")
 
     def _suggestion_count(self):
         self.suggestion_count = self.env['suggestion.student12'].search_count(
             domain=[('student_name', '=', self.student_name)]
+        )
+
+    def _invoice_count(self):
+        self.invoice_count = self.env['account.move'].search_count(
+            domain=[('invoice_partner_display_name', '=', self.student_name)]
         )
 
     def create(self, vals):
@@ -111,12 +118,25 @@ class SchoolManagement(models.Model):
     def action_view_button(self):
         return {
             'type': 'ir.actions.act_window',
-            'name': 'View Related Records',
+            'name': 'Suggestions',
             'view_mode': 'tree,form',
             'res_model': 'suggestion.student12',  # your related model
             'domain': [('student_name', '=', self.student_name)]
 
         }
+    #invoice button
+    def action_view_invoice(self):
+        print("done")
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Invoices',
+            'view_mode': 'tree,form',
+            'res_model': 'account.move',  # your related model
+            'domain': [('invoice_partner_display_name', '=', self.student_name)]
+
+        }
+
+
 
     # Email button
     def action_email(self):
@@ -162,7 +182,7 @@ class SchoolManagement(models.Model):
                 print("not found the template")
 
 
-    # auto fetch for partner_id
+
 
 
 

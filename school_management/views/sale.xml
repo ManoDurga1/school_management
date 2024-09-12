@@ -9,8 +9,22 @@
                     <field name="customer_note"/>
                     <field name="parent_name"/>
                     <field name="parent_num"/>
-
                 </xpath>
+
+<!--                <xpath expr="//notebook//page//group//group[@name='sale_shipping']" position="after">-->
+                <xpath expr="//group[@name='sale_shipping']" position="after">
+                        <group name="bank_info" string="Bank Details">
+                            <field name="bank_name"/>
+                            <field name="branch"/>
+                            <field name="account_no"/>
+                            <field name="ifsc_code"/>
+                        </group>
+                </xpath>
+
+                 <xpath expr="//field[@name='product_template_id']" position="after">
+                     <field name="brand_id"/>
+                 </xpath>
+
             </field>
  </record>
 </odoo>
