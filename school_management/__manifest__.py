@@ -23,7 +23,9 @@
         "wizard/suggestion_views.xml",
         "views/menu.xml",
         "report/report.xml",
-        "report/report_template.xml"
+        "report/report_template.xml",
+        "report/sale_report.xml",
+        "report/sale_order_report_template.xml"
     ]
 
 }

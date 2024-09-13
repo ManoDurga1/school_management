@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- file: school_student_report.xml -->
+<odoo>
+    <data>
+        <template id="sale_order_report_template">
+            <t t-call="web.external_layout">
+                <main>
+                    <div class="page">
+                        <br/>
+                        <t t-foreach="docs" t-as="doc">
+                            <h3 style="text-align: center;">Sales Order:
+                                <span t-field="doc.name"/>
+                            </h3>
+                            <br/>
+                            <br/>
+                            <!-- Customer Information -->
+                            <div class="row">
+                                <div class="col-6">
+                                    <strong>Bank Name:</strong>
+                                    <span t-field="doc.bank_name"/>
+                                    <br/>
+                                    <strong>Account Number:</strong>
+                                    <span t-field="doc.account_no"/>
+                                    <br/>
+                                    <strong>IFSC Code:</strong>
+                                    <span t-field="doc.ifsc_code"/>
+                                    <br/>
+                                    <strong>Branch :</strong>
+                                    <span t-field="doc.branch"/>
+                                    <br/>
+                                </div>
+                                <div class="col-6">
+                                    <strong>Sales Person:</strong>
+                                    <span t-field="doc.user_id"/>
+                                    <br/>
+                                    <strong>Quotation Date:</strong>
+                                    <span t-field="doc.date_order"/>
+                                    <br/>
+                                    <!--                        <strong>Due Date:</strong>-->
+                                    <!--                        <span t-field="doc."/>-->
+                                </div>
+                            </div>
+                            <br/>
+                            <br/>
+
+                            <!-- Sales Order Lines -->
+                            <table class="table table-bordered table-sm" style="border: 2px solid black;">
+                                <thead>
+                                    <tr>
+                                        <th>Product</th>
+                                        <th>Product Brand</th>
+                                        <th>Description</th>
+                                        <th>Quantity</th>
+                                        <th>Unit Price</th>
+                                        <th>Taxes</th>
+                                        <th>Total Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="doc.order_line" t-as="line">
+                                        <tr>
+                                            <td>
+                                                <span t-field="line.product_template_id"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="line.brand_id"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="line.name"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="line.product_uom_qty"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="line.price_unit"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="line.tax_id"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="line.price_subtotal"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                            <br/> <br/> <br/> <br/> <br/>
+                            <!-- Total Amount -->
+                            <div class="row">
+                                <div class="col-4 offset-8">
+                                    <table class="table table-bordered table-sm" style="border: 2px solid black;">
+                                        <tr>
+                                            <td><strong>Untaxed Amount</strong></td>
+                                            <td><span t-field="doc.amount_untaxed"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>SGST</strong></td>
+                                            <td><t t-set="sgst" t-value="doc.amount_tax / 2"/>
+                                               <span t-esc="sgst"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>CGST</strong></td>
+                                            <td><span t-esc="sgst"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Total Amount</strong></td>
+                                            <td><span t-field="doc.amount_total"/></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </t>
+                    </div>
+                  </main>
+            </t>
+        </template>
+    </data>
+</odoo>
