@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="invoice_report_template" inherit_id="account.report_invoice_document">
+        <!-- Modify attributes of the parent div if necessary -->
+        <xpath expr="//div[@id='informations']" position="replace">
+            <!-- Replacing the content of the 'informations' div with the new layout -->
+            <div class="row mt-3 mb-1">
+                <!--                <div class="col-4">-->
+                <!--                    <p><strong>Customer Details</strong></p>-->
+                <!--                    <table class="table table-sm table-borderless">-->
+                <!--                        <tr>-->
+                <!--                            <td><strong>Customer Name:</strong></td>-->
+                <!--                            <td><span t-field="o.partner_id.name"/></td>-->
+                <!--                        </tr>-->
+                <!--                        <tr>-->
+                <!--                            <td><strong>Parent Name:</strong></td>-->
+                <!--                            <td><span t-field="o.parent_name"/></td>-->
+                <!--                        </tr>-->
+                <!--                        <tr>-->
+                <!--                            <td><strong>Parent Number:</strong></td>-->
+                <!--                            <td><span t-field="o.parent_num"/></td>-->
+                <!--                        </tr>-->
+                <!--                    </table>-->
+                <!--                </div>-->
+                <div class="col-6">
+                    <p>
+                        <strong>Bank Details</strong>
+                    </p>
+                    <table class="table table-sm table-borderless">
+                        <tr>
+                            <td>
+                                <strong>Bank Name:</strong>
+                            </td>
+                            <td>
+                                <span t-field="o.bank"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>Account Number:</strong>
+                            </td>
+                            <td>
+                                <span t-field="o.account_no"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>Branch:</strong>
+                            </td>
+                            <td>
+                                <span t-field="o.branch"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>IFSC Code:</strong>
+                            </td>
+                            <td>
+                                <span t-field="o.ifsc_code"/>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-6">
+                    <p>
+                        <strong>Invoice and Dates</strong>
+                    </p>
+                    <table class="table table-sm table-borderless">
+                        <tr>
+                            <td>
+                                <strong>Invoice Date:</strong>
+                            </td>
+                            <td>
+                                <span t-field="o.invoice_date"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>Due Date:</strong>
+                            </td>
+                            <td>
+                                <span t-field="o.invoice_date_due"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>Delivery Date:</strong>
+                            </td>
+                            <td>
+                                <span t-field="o.delivery_date"/>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+        </xpath>
+
+        <xpath expr="//table//thead//tr//th[@name='th_description']" position="before">
+            <th name="th_si_no" class="text-start">
+                <strong>SI No</strong>
+            </th>
+            <th name="th_product" class="text-start">
+                <strong>Product</strong>
+            </th>
+        </xpath>
+
+        <xpath expr="//table//tbody[@class='invoice_tbody']" position="before">
+            <t t-set="sequence" t-value="0"/>
+        </xpath>
+
+        <xpath expr="//table//tbody//tr//td[@name='account_invoice_line_name']" position="before">
+            <td name="td_si_no" class="text-start">
+                <t t-set="sequence" t-value="sequence + 1"/>
+                <t t-esc="sequence"/>
+            </td>
+            <td name="td_product">
+                <span t-field="line.product_id.name"/>
+            </td>
+        </xpath>
+
+        <xpath expr="//table[@name='invoice_line_table']" position="attributes">
+            <attribute name="class" remove="table-borderless" add="table-bordered" separator=" "/>
+            <attribute name="style" remove="" add="border: 2px solid #343a40; width: 100%; margin-top: 20px; border-collapse: collapse;" separator=" "/>
+        </xpath>
+
+        <xpath expr="//table[@name='invoice_line_table']//thead" position="attributes">
+            <attribute name="style" remove="" add="background-color: pink; color: black;" separator=" "/>
+        </xpath>
+
+        <xpath expr="//div[@id='right-elements']//table[@class='table table-sm table-borderless avoid-page-break-inside']" position="attributes">
+          <attribute name="class" remove="table-borderless" add="table-bordered" separator=" "/>
+            <attribute name="style" remove=" " add="border: 2px solid #343a40; width: 100%; margin-top: 20px; border-collapse: collapse;" separator=" "/>
+        </xpath>
+
+        <xpath expr="//div[@class='mt-5 clearfix']//div[@class='page mb-4']//h2" position="attributes">
+            <attribute name="style" add="text-align: center;" separator=" " remove=" "/>
+        </xpath>
+
+    </template>
+</odoo>

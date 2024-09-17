@@ -22,12 +22,14 @@ class FeeStructure(models.Model):
     due_date = fields.Date(string="Due Date")
     tax_amount = fields.Float(string="Tax Amount", default=0.0, compute="_compute_tax_amount")
     state = fields.Selection([('unpaid', 'Unpaid'), ('paid', 'Paid')],
-                             default="unpaid")
+                             default="unpaid", compute="_compute_status_based_on_invoice")
     tax = fields.Many2many('account.tax', string='Tax')
 
     total_amount = fields.Float(string="Total Amount", compute='_compute_total_amount')
 
     product_id = fields.Many2one('product.product', string="Product")
+
+    invoice_id = fields.Many2one('account.move')
 
     def action_confirm(self):
         for rec in self:
@@ -63,41 +65,53 @@ class FeeStructure(models.Model):
     def _compute_total_amount(self):
         for rec in self:
             rec.total_amount = rec.fee_amount + rec.tax_amount
-
+    # this code is belong's to make payment button
     def action_payment(self):
         print("button")
-
-        invoice_vals = {
-            'move_type': 'out_invoice',  # Customer Invoice
-            'partner_id': self.student_id.login_id.partner_id.id,  # Linked partner (customer)
-            'parent_name':self.student_id.gaurdian_name,
-            'parent_num':self.student_id.phone_number,
-            'invoice_line_ids': [(0, 0, {
-                'name': self.name,  # Description of the fee
-                'product_id':self.product_id.id,
-                'quantity': 1,
-                'price_unit': self.fee_amount,  # The fee amount
-                'tax_ids': [(6, 0, self.tax.ids)],  # Taxes if applicable
-            })],
-        }
-        invoice = self.env['account.move'].create(invoice_vals)
-
-        # Post the invoice (validate it)
-        invoice.action_post()  # This confirms and posts the invoice
-
-        # if already paid the bill then generate this error!!!
-        if self.state != 'unpaid':
+        if self.state == 'paid':
             raise UserError("this payment is already done!!!!")
-        # Optionally, update the state of the fee structure to 'invoiced' or similar
-        self.state = 'paid'
-        # Return an action to open the created invoice
-        return {
-            'name': 'Customer Invoice',
-            'type': 'ir.actions.act_window',
-            'res_model': 'account.move',
-            'view_mode': 'form',
-            'res_id': invoice.id,
-            'target': 'current',
-        }
+        if self.invoice_id:
+            return {
+                'name': 'Customer Invoice',
+                'type': 'ir.actions.act_window',
+                'res_model': 'account.move',
+                'view_mode': 'form',
+                'res_id': self.invoice_id.id,
+                'target': 'current',
+            }
+        else:
+            invoice = self.env['account.move'].create(
+                {
+                    'move_type': 'out_invoice',  # Customer Invoice
+                    'partner_id': self.student_id.login_id.partner_id.id,  # Linked partner (customer)
+                    'parent_name': self.student_id.gaurdian_name,
+                    'parent_num': self.student_id.phone_number,
+                    'invoice_line_ids': [(0, 0, {
+                        'name': self.name,  # Description of the fee
+                        'product_id': self.product_id.id,
+                        'quantity': 1,
+                        'price_unit': self.fee_amount,  # The fee amount
+                        'tax_ids': [(6, 0, self.tax.ids)],  # Taxes if applicable
+                    })],
+                }
+            )
+            self.invoice_id = invoice.id
+            return {
+                'name': 'Customer Invoice',
+                'type': 'ir.actions.act_window',
+                'res_model': 'account.move',
+                'view_mode': 'form',
+                'res_id': invoice.id,
+                'target': 'current',
+            }
 
-
+    def _compute_status_based_on_invoice(self):
+        """ Compute the fee status based on invoice payment state """
+        for rec in self:
+            if rec.invoice_id:
+                if rec.invoice_id.payment_state == 'paid':
+                    rec.state = 'paid'
+                else:
+                    rec.state='unpaid'
+            else:
+                rec.state = 'unpaid'

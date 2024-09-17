@@ -127,6 +127,31 @@
         </field>
     </record>
 
+    <record id="view_school_student_search" model="ir.ui.view">
+        <field name="name">view.school.student.search</field>
+        <field name="model">school.student</field>
+        <field name="arch" type="xml">
+            <search string="Students">
+                <field name="student_name"/>
+                <field name="dateofbirth"/>
+                <field name="gender"/>
+                <field name="email"/>
+                <field name="gaurdian_name"/>
+                <field name="address"/>
+                <field name="phone_number"/>
+                <field name="standard"/>
+                <field name="department"/>
+                <field name="teacher"/>
+                <field name="joining_date"/>
+                <filter string="male" name="male_students" domain="[('gender', '=', 'male')]"/>
+<!--                 <separator/>-->
+                <filter string="female" name="female_students" domain="[('gender', '=', 'female')]"/>
+                 <group expand="1" string="Group By">
+                        <filter name="group_by" string="Gender" context="{'group_by' : 'gender'}"/>
+                 </group>
+            </search>
+        </field>
+    </record>
 
     <record id="action_school_student" model="ir.actions.act_window">
         <field name="name">Student</field>

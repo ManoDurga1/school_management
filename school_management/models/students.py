@@ -80,7 +80,7 @@ class SchoolManagement(models.Model):
         if self.teacher:
             self.teacher_no = self.teacher.mobile_number
 
-    #  select button and automate fetch and creation of users and login creadintials
+    #  select button and automate fetch and creation of users and login credintials
     def action_select(self):
         self.state = "selected"
         user_vals = {

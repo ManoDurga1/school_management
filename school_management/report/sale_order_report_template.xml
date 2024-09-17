@@ -9,7 +9,9 @@
                     <div class="page">
                         <br/>
                         <t t-foreach="docs" t-as="doc">
-                            <h3 style="text-align: center;">Sales Order:
+                            <h3 style="text-align: center;">
+                                <t t-if="doc.state in ['draft', 'sent']"> Quotation:</t>
+                                <t t-else="">Sales Order:</t>
                                 <span t-field="doc.name"/>
                             </h3>
                             <br/>
@@ -48,6 +50,7 @@
                             <table class="table table-bordered table-sm" style="border: 2px solid black;">
                                 <thead>
                                     <tr>
+                                        <th>S.NO</th>
                                         <th>Product</th>
                                         <th>Product Brand</th>
                                         <th>Description</th>
@@ -58,8 +61,13 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <t t-set="sequence" t-value="0"/>
                                     <t t-foreach="doc.order_line" t-as="line">
                                         <tr>
+                                            <td>
+                                                <t t-set="sequence" t-value="sequence + 1"/>
+                                                <t t-esc="sequence"/>
+                                            </td> <!-- Sequence Number -->
                                             <td>
                                                 <span t-field="line.product_template_id"/>
                                             </td>
@@ -79,40 +87,60 @@
                                                 <span t-field="line.tax_id"/>
                                             </td>
                                             <td>
-                                                <span t-field="line.price_subtotal"/>
+                                                <span t-field="line.price_total"/>
                                             </td>
                                         </tr>
                                     </t>
                                 </tbody>
                             </table>
-                            <br/> <br/> <br/> <br/> <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
                             <!-- Total Amount -->
                             <div class="row">
                                 <div class="col-4 offset-8">
                                     <table class="table table-bordered table-sm" style="border: 2px solid black;">
                                         <tr>
-                                            <td><strong>Untaxed Amount</strong></td>
-                                            <td><span t-field="doc.amount_untaxed"/></td>
+                                            <td>
+                                                <strong>Untaxed Amount</strong>
+                                            </td>
+                                            <td>
+                                                <span t-field="doc.amount_untaxed"/>
+                                            </td>
                                         </tr>
                                         <tr>
-                                            <td><strong>SGST</strong></td>
-                                            <td><t t-set="sgst" t-value="doc.amount_tax / 2"/>
-                                               <span t-esc="sgst"/></td>
+                                            <td>
+                                                <strong>SGST</strong>
+                                            </td>
+                                            <td>₹
+                                                <t t-set="sgst" t-value="doc.amount_tax / 2"/>
+                                                <span t-esc="sgst"/>
+                                            </td>
                                         </tr>
                                         <tr>
-                                            <td><strong>CGST</strong></td>
-                                            <td><span t-esc="sgst"/></td>
+                                            <td>
+                                                <strong>CGST</strong>
+                                            </td>
+                                            <td>₹
+                                                <span t-esc="sgst"/>
+                                            </td>
                                         </tr>
                                         <tr>
-                                            <td><strong>Total Amount</strong></td>
-                                            <td><span t-field="doc.amount_total"/></td>
+                                            <td>
+                                                <strong>Total Amount</strong>
+                                            </td>
+                                            <td>
+                                                <span t-field="doc.amount_total"/>
+                                            </td>
                                         </tr>
                                     </table>
                                 </div>
                             </div>
                         </t>
                     </div>
-                  </main>
+                </main>
             </t>
         </template>
     </data>

@@ -15,6 +15,14 @@
                     <field name="student_fee" string="Student Fee" optional="show"/>
 
             </xpath>
+            <xpath expr="//group[@name='accounting_info_group']" position="after" >
+                <group name="bank_detail" string="Bank Details">
+                    <field name="bank"/>
+                    <field name="account_no"/>
+                    <field name="branch"/>
+                    <field name="ifsc_code"/>
+                </group>
+            </xpath>
         </field>
     </record>
 </odoo>
