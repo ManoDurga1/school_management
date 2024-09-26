@@ -13,5 +13,18 @@
             <field name="binding_model_id" ref="model_sale_order"/>
             <field name="binding_type">report</field>
         </record>
+
+        <record id="sale_order_report_xlsx" model="ir.actions.report">
+            <field name="name">Sale Report Xlsx</field>
+            <field name="model">sale.order</field>
+            <field name="report_type">xlsx</field>
+            <field name="report_name">school_management.sale_order_report_xlsx</field>
+            <field name="report_file">school_management.sale_order_report_xlsx</field>
+            <field name="print_report_name">
+            'Quotation - %s' % (object.partner_id.name) if object.state == 'draft' else 'Sale Order - %s' % (object.partner_id.name)
+            </field>
+            <field name="binding_model_id" ref="model_sale_order"/>
+            <field name="binding_type">report</field>
+        </record>
     </data>
 </odoo>

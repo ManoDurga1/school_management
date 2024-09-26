@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+ <record id="view_sale_order_form_customer_report" model="ir.ui.view">
+            <field name="name">sale.order.form.inherit.customer.report</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+<!--                <xpath expr="//group[@name='sale_shipping']" position="after">-->
+<!--                        <group name="bank_info" string="Bank Details">-->
+<!--                            <field name="bank_name"/>-->
+<!--                            <field name="branch"/>-->
+<!--                            <field name="account_no"/>-->
+<!--                            <field name="ifsc_code"/>-->
+<!--                        </group>-->
+<!--                </xpath>-->
+
+                <xpath expr="//group[@name='sale_shipping']" position="inside">
+                        <field name="due_date"/>
+                        <field name="shipping_terms"/>
+                </xpath>
+            </field>
+ </record>
+
+</odoo>

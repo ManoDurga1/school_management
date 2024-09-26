@@ -47,6 +47,7 @@
 
 
                     </div>
+                    <field name="student_img" widget="image" class="oe_avatar"/>
                     <group>
                         <group>
                             <field name="student_name"/>
@@ -136,27 +137,88 @@
                 <field name="dateofbirth"/>
                 <field name="gender"/>
                 <field name="email"/>
-                <field name="gaurdian_name"/>
                 <field name="address"/>
                 <field name="phone_number"/>
-                <field name="standard"/>
-                <field name="department"/>
                 <field name="teacher"/>
                 <field name="joining_date"/>
                 <filter string="male" name="male_students" domain="[('gender', '=', 'male')]"/>
-<!--                 <separator/>-->
+                  <!--     <separator/>-->
                 <filter string="female" name="female_students" domain="[('gender', '=', 'female')]"/>
                  <group expand="1" string="Group By">
                         <filter name="group_by" string="Gender" context="{'group_by' : 'gender'}"/>
+                      <filter name="group_by_student" string="Student" context="{'group_by' : 'student_name'}"/>
                  </group>
+                 <searchpanel>
+                     <field name="teacher" string="Teachers" enable_counters="1"/>
+                 </searchpanel>
             </search>
+        </field>
+    </record>
+    <record id="view_school_student_pivot" model="ir.ui.view">
+        <field name="name">school.student.pivot</field>
+        <field name="model">school.student</field>
+        <field name="arch" type="xml">
+            <pivot string="School students">
+                <!-- Define the measures (metrics) here -->
+                <field name="age" type="measure"/>
+                <field name="total_tax_amount" type="measure"/>
+                <field name="total_fee_amount" type="measure"/>
+                <field name="total_sum_amount" type="measure"/>
+                <!-- Define the row grouping fields -->
+                <field name="student_name" type="row"/>
+                <field name="standard" type="col"/>
+
+            </pivot>
+        </field>
+    </record>
+
+    <record id="view_school_student_kanban" model="ir.ui.view">
+        <field name="name">school.student.kanban</field>
+        <field name="model">school.student</field>
+        <field name="arch" type="xml">
+            <kanban >
+                <field name="student_name"/>
+                <field name="age"/>
+                <field name="standard"/>
+                <field name="total_sum_amount"/>
+                <field name="invoice_count"/>
+                <field name="suggestion_count"/>
+                <template>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_card">
+                             <div class="o_kanban_primary_center">
+                                <strong><field name="student_name"/></strong>
+                            </div>
+                              <div>
+                                <span>Age: <field name="age"/></span>
+                              </div>
+                            <div>
+                                <span>Standard: <field name="standard"/></span>
+                              </div>
+                            <div>
+                                <span>Total Amount: <field name="total_sum_amount" /></span>
+                            </div>
+                            <div>
+                                <span>Invoices: <field name="invoice_count" /></span>
+                            </div>
+                            <div>
+                                <span>Suggestions: <field name="suggestion_count" /></span>
+                            </div>
+                        </div>
+                    </t>
+                </template>
+
+
+            </kanban>
         </field>
     </record>
 
     <record id="action_school_student" model="ir.actions.act_window">
         <field name="name">Student</field>
         <field name="res_model">school.student</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">tree,form,pivot,kanban</field>
+        <field name="search_view_id" ref="view_school_student_search"/>
+        <field name="context">{'search_default_male_students': 1}</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
                 Create a new student

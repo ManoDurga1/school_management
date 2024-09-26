@@ -39,5 +39,19 @@
               action="action_suggestion_student"
               groups="school_management.group_school_management"
     />
+    <menuitem id="menu_billing"
+              name="Billing"
+              parent="menu_school_root"
+    />
+    <menuitem id="menu_invoicing"
+              name="Invoice"
+              parent="menu_billing"
+              action="account.action_move_out_invoice_type"
+              />
+    <menuitem id="menu_payment"
+              name="Payment"
+              parent="menu_billing"
+              action="account.action_account_payments"
+              />
 
 </odoo>

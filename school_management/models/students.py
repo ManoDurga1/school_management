@@ -34,6 +34,8 @@ class SchoolManagement(models.Model):
     teacher_no = fields.Char(string="Teacher No")
     extra_staff = fields.Many2many("school.teacher", string="other subject teachers",
                                    help="mention the teachers who teach other subjects as well")
+
+    student_img = fields.Image(string="Student Image")
     fee_structure = fields.One2many('fee.structure', inverse_name='student_id', string="Fee Structure")
 
     state = fields.Selection([('not selected', 'Not selected'), ('selected', 'Selected')],
@@ -48,14 +50,17 @@ class SchoolManagement(models.Model):
                                       compute="_suggestion_count")
 
     def _suggestion_count(self):
-        self.suggestion_count = self.env['suggestion.student12'].search_count(
-            domain=[('student_name', '=', self.student_name)]
-        )
+        for student in self:
+            student.suggestion_count = self.env['suggestion.student12'].search_count(
+                domain=[('student_name', '=', student.student_name)]
+            )
 
     def _invoice_count(self):
-        self.invoice_count = self.env['account.move'].search_count(
-            domain=[('invoice_partner_display_name', '=', self.student_name)]
-        )
+        for student in self:
+            student.invoice_count = self.env['account.move'].search_count(
+                domain=[('invoice_partner_display_name', '=', student.student_name)]
+            )
+
 
     def create(self, vals):
         print('Entered in create', vals)
@@ -144,9 +149,9 @@ class SchoolManagement(models.Model):
         mail = template.send_mail(self.id, force_send=True)
         print("hello", mail)
 
-    total_tax_amount = fields.Float(string="Total Tax Amount", compute="_compute_sum", store=False)
-    total_fee_amount = fields.Float(string="Total Fee Amount", compute="_compute_sum", store=False)
-    total_sum_amount = fields.Float(string="Total Sum Of All Amounts", compute="_compute_sum", store=False)
+    total_tax_amount = fields.Float(string="Total Tax Amount", compute="_compute_sum", store=True)
+    total_fee_amount = fields.Float(string="Total Fee Amount", compute="_compute_sum", store=True)
+    total_sum_amount = fields.Float(string="Total Sum Of All Amounts", compute="_compute_sum", store=True)
 
     @api.depends('fee_structure.tax_amount', 'fee_structure.total_amount', 'fee_structure.fee_amount')
     def _compute_sum(self):

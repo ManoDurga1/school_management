@@ -2,8 +2,12 @@
     "name": "school management",
     "author": "mr.manu",
     "version": "18.0",
-    "depends": ['sale',
-           'account','mail'],
+    "depends": [
+        'sale',
+        'account',
+        'mail' ,
+        'report_xlsx'
+                ],
 
     "data": [
         "security/ir.model.access.csv",
@@ -17,16 +21,20 @@
         "views/teacher_views.xml",
         "views/fee_structure_views.xml",
         "views/sale.xml",
+        "views/sale_order.xml",
         "views/product_brand.xml",
         "views/invoice_views.xml",
         "views/suggestion_stu_views.xml",
         "wizard/suggestion_views.xml",
         "views/menu.xml",
+        "views/res_config_settings.xml",
         "report/report.xml",
         "report/report_template.xml",
         "report/sale_report.xml",
-        "report/sale_order_report_template.xml",
-        "report/invoice_report_inherit.xml"
+        "report/sale_report_template.xml",
+        "report/invoice_report_inherit.xml",
+        "report/new_sale_order_report.xml",
+        "report/new_sale_order_report_template.xml",
     ]
 
 }
