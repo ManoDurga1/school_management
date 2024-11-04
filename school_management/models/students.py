@@ -19,6 +19,7 @@ class SchoolManagement(models.Model):
         'mail.thread'
     ]
 
+
     student_name = fields.Char(string='Name', required=True)
     dateofbirth = fields.Date(string="DOB")
     age = fields.Integer(string="Student Age", compute='_age_student', store=True)
@@ -36,6 +37,8 @@ class SchoolManagement(models.Model):
                                    help="mention the teachers who teach other subjects as well")
 
     student_img = fields.Image(string="Student Image")
+    color = fields.Integer(string="Color") # for Kanban view purpose
+    active = fields.Boolean(default=True)
     fee_structure = fields.One2many('fee.structure', inverse_name='student_id', string="Fee Structure")
 
     state = fields.Selection([('not selected', 'Not selected'), ('selected', 'Selected')],

@@ -15,3 +15,5 @@ class InvoiceLines(models.Model):
     _inherit = "account.move.line"
 
     student_fee=fields.Many2one("fee.structure",string="Student Fee")
+
+    brand_id = fields.Many2one('product.brand', string="Product Brand")

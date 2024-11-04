@@ -171,21 +171,45 @@
             </pivot>
         </field>
     </record>
-
+  #  kanban view  .................................................
     <record id="view_school_student_kanban" model="ir.ui.view">
         <field name="name">school.student.kanban</field>
         <field name="model">school.student</field>
         <field name="arch" type="xml">
-            <kanban >
+            <kanban default_group_by="state"
+                      recorde_draggable="1"
+                      groups_draggable="1"
+                      quick_create="1"
+                      on_create="quick_create"
+                      quick_create_view="school_management.view_school_student_kanban_form"
+                      group_create="0"
+                      group_edit="0"
+                      group_delete="0"
+                      archivable="1">
+
+                <progressbar field="state" colors='{"not selected":"muted","selected":"success"}'/>
                 <field name="student_name"/>
                 <field name="age"/>
                 <field name="standard"/>
                 <field name="total_sum_amount"/>
                 <field name="invoice_count"/>
                 <field name="suggestion_count"/>
+                <field name="id"/>
+                <field name="student_img"/>
+                <field name="color"/>
                 <template>
+                    <t t-name="kanban-menu">
+                            <t t-if="widget.editable"><a role="menuitem" type="edit" class="dropdown-item">Edit</a></t>
+                            <t t-if="widget.deletable"><a role="menuitem" type="delete" class="dropdown-item">Delete</a></t>
+                            <ul class="oe_kanban_colorpicker" data-field="color"/>
+                        </t>
                     <t t-name="kanban-box">
-                        <div class="oe_kanban_card">
+                        <div class="oe_kanban_global_click o_kanban_record_has_image_fill">
+                            <div class="o_kanban_image d-none d-md-block"
+                            t-attf-style="background-image:url('#{kanban_image('school.student','student_img',record.id.raw_value,placeholder)}'); background-size: contain;">
+
+                            </div>
+                            <div class="oe_kanban_detail d-flex flex-column">
                              <div class="o_kanban_primary_center">
                                 <strong><field name="student_name"/></strong>
                             </div>
@@ -205,11 +229,29 @@
                                 <span>Suggestions: <field name="suggestion_count" /></span>
                             </div>
                         </div>
+                        </div>
                     </t>
                 </template>
 
 
             </kanban>
+        </field>
+    </record>
+  # view form for kanban view....
+    <record id="view_school_student_kanban_form" model="ir.ui.view">
+        <field name="name">view.school.student.kanban.form</field>
+        <field name="model">school.student</field>
+        <field name="arch" type="xml">
+            <form >
+                <group>
+                 <field name="student_name" placeholder="e.g.your name"/>
+                <field name="dateofbirth" />
+                <field name="gender"/>
+                <field name="email" placeholder="e.g.your email"/>
+                <field name="gaurdian_name"/>
+                <field name="address" placeholder="e.g.your address"/>
+                </group>
+            </form>
         </field>
     </record>
 

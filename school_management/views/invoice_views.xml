@@ -15,6 +15,11 @@
                     <field name="student_fee" string="Student Fee" optional="show"/>
 
             </xpath>
+            <xpath expr="//field[@name='tax_ids']" position="after">
+
+                    <field name="brand_id"/>
+
+            </xpath>
             <xpath expr="//group[@name='accounting_info_group']" position="after" >
                 <group name="bank_detail" string="Bank Details">
                     <field name="bank"/>
